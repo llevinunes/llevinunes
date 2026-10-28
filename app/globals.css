@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg-0: #0f1217;     /* página / hero */
+  --bg-1: #161a1f;     /* seções, title bars */
+  --bg-2: #12161b;     /* seção alternada (Experience) */
+  --window: #0f1216;   /* corpo das janelas */
+  --border: #2a2f35;
+  --accent: #34b4f3;
+  --text: #ffffff;
+  --muted: #bbc5d1;
+  --dim: #757c83;      /* só texto de apoio ≥ 12px (contraste no limite) */
+  --green: #3fb950;
+  --yellow: #e3b341;
+  --purple: #bc8cff;
+  --red: #f47067;
+  --lum-on: #f5c542;   /* luminária acesa no mapa do TG+ */
+  --tl-close: #ff5f57; --tl-min: #febc2e; --tl-zoom: #28c840;
+  --statusbar: #0b0e12;
+  --on-accent: #0f1217;
+  --street: #222830;
+  --window-shadow: 0 16px 40px -8px rgb(0 0 0 / .35);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg-0: #f6f8fa;
+  --bg-1: #ffffff;
+  --bg-2: #eef1f4;
+  --window: #ffffff;
+  --border: #d0d7de;
+  --accent: #0a74b4;
+  --text: #0f1217;
+  --muted: #3d4651;
+  --dim: #646c75;
+  --green: #1a7f37;
+  --yellow: #9a6700;
+  --purple: #8250df;
+  --red: #cf222e;
+  --statusbar: #e8ecf0;
+  --on-accent: #ffffff;
+  --street: #dfe4ea;
+  --window-shadow: 0 16px 40px -8px rgb(15 18 23 / .14);
+  color-scheme: light;
+}
+
+@theme inline {
+  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --color-bg-0: var(--bg-0);
+  --color-bg-1: var(--bg-1);
+  --color-bg-2: var(--bg-2);
+  --color-window: var(--window);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-green: var(--green);
+  --color-yellow: var(--yellow);
+  --color-purple: var(--purple);
+  --color-red: var(--red);
+  --color-lum-on: var(--lum-on);
+  --color-statusbar: var(--statusbar);
+  --color-tl-close: var(--tl-close);
+  --color-tl-min: var(--tl-min);
+  --color-tl-zoom: var(--tl-zoom);
+
+  --radius-window: 12px;
+  --radius-button: 16px;
+  --radius-section: 32px;
+  --shadow-window: var(--window-shadow);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg-0);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* marcador markdown (#, ##, ###) — sempre Plex Mono */
+.md-mark {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.35em;
+}
+
+.hero-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+
+/* dot grid + glow (o único da tela) */
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(255 255 255 / .14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 70% 60% at 65% 40%, #000 30%, transparent 100%);
+}
+[data-theme="light"] .hero::before {
+  background-image: radial-gradient(rgb(0 0 0 / .12) 1px, transparent 1px);
+}
+.hero-glow {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgb(52 180 243 / .18), transparent);
+  filter: blur(40px);
+}
+
+/* cursor do terminal */
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+.caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+/* janelas flutuantes do hero (só no desktop, onde são absolutas) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@media (min-width: 1024px) {
+  .float {
+    animation: float 7s ease-in-out infinite;
+  }
+  .float[data-paused="true"] {
+    animation-play-state: paused;
+  }
+}
+
+/* header: troca de seção no breadcrumb e indicador da nav */
+@keyframes crumb-in {
+  from { opacity: 0; transform: translateY(80%); }
+}
+@keyframes crumb-out {
+  to { opacity: 0; transform: translateY(-80%); }
+}
+.crumb-in {
+  animation: crumb-in .3s cubic-bezier(.2, .8, .2, 1) both;
+}
+.crumb-out {
+  animation: crumb-out .25s cubic-bezier(.4, 0, 1, 1) both;
+}
+/* espera o anterior sair (.25s) + uma pausa curta, para não sobrepor */
+.crumb-in-after {
+  animation-delay: .35s;
+}
+.nav-indicator {
+  transition: left .35s cubic-bezier(.3, .8, .3, 1), width .35s cubic-bezier(.3, .8, .3, 1), opacity .2s ease;
+}
+
+/* ícone do botão de tema (sol ↔ lua) */
+@keyframes theme-icon-in {
+  from { opacity: 0; transform: rotate(-120deg) scale(.4); }
+}
+.theme-icon-in {
+  animation: theme-icon-in .45s cubic-bezier(.2, .9, .3, 1.2) both;
+}
+
+/* ícone entrando na dock */
+@keyframes dock-in {
+  from { opacity: 0; transform: translateY(12px) scale(.6); }
+}
+.dock-in {
+  animation: dock-in .3s cubic-bezier(.2, .9, .3, 1.3);
+}
+
+/* luminárias do mapa TG+ */
+.lum {
+  fill: var(--dim);
+  opacity: .35;
+  stroke: transparent;
+  stroke-width: 1.5px;
+  transition: fill .35s ease, stroke .35s ease, opacity .35s ease, filter .35s ease;
+}
+
+/* modo escuro = noite: tudo começa apagado e acende em sequência (falhas ficam vermelhas) */
+[data-lit="true"] .lum[data-state="on"],
+[data-theme="light"] .lum[data-state="on"],
+[data-theme="light"] .lum[data-state="fault"] {
+  fill: var(--lum-on);
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgb(245 197 66 / .7));
+}
+[data-lit="true"] .lum[data-state="fault"],
+[data-theme="light"] [data-lit="true"] .lum[data-state="fault"] {
+  fill: var(--red);
+  opacity: 1;
+  filter: none;
+}
+
+/* modo claro = dia: tudo começa aceso e a fotocélula apaga em sequência */
+[data-theme="light"] [data-lit="true"] .lum[data-state="on"] {
+  fill: var(--bg-1);
+  stroke: var(--dim);
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret, .float, .dock-in, .crumb-in, .theme-icon-in { animation: none; }
+  /* sem animação o onAnimationEnd não dispara: o item que sai só some */
+  .crumb-out { display: none; }
+  .nav-indicator { transition: none; }
+  .lum { transition: none; }
+}
