@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "title": "Levi Nunes — Desenvolvedor de Software",
+    "description": "Desenvolvedor full stack na NEPEN, mantendo o software que as cidades usam para monitorar e controlar a iluminação pública."
+  },
+  "header": {
+    "file": "docs/llevinunes.md",
+    "home": "Voltar ao topo",
+    "nav": {
+      "projects": "projetos",
+      "experience": "experiencia",
+      "contact": "contato"
+    },
+    "language": "Idioma",
+    "themeToLight": "Mudar para tema claro",
+    "themeToDark": "Mudar para tema escuro"
+  },
+  "window": {
+    "close": "Fechar janela",
+    "minimize": "Minimizar janela",
+    "zoom": "Expandir janela",
+    "open": "Abrir {file}",
+    "dock": "Janelas fechadas"
+  },
+  "hero": {
+    "greeting": "Oi, eu sou o",
+    "name": "Levi Nunes",
+    "role": "Desenvolvedor de Software",
+    "blurb": "Hoje eu cuido da manutenção do software que permite às cidades ficarem de olho na própria iluminação. 💡",
+    "cta": "Ver projetos",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "E-mail",
+    "profileAlt": "Foto de Levi Nunes",
+    "coffeeLabel": "Arte ASCII de uma xícara de café fumegante"
+  },
+  "status": {
+    "file": "system-status.sh",
+    "meta": "bash 5.2",
+    "whoami": {
+      "cmd": "whoami",
+      "user": "levi.nunes",
+      "out": "→ dev full stack @",
+      "company": "NEPEN"
+    },
+    "uptime": {
+      "cmd": "uptime",
+      "out": "desde 2023 · ~2.700 commits em produção · milhares de luminárias conectadas"
+    },
+    "stack": {
+      "cmd": "cat /etc/stack",
+      "rows": {
+        "frontend": "React · TypeScript · Vite · Tailwind · Leaflet",
+        "backend": "Java · Spring Boot · .NET / C#",
+        "data": "PostgreSQL + PostGIS · Redis · Flyway",
+        "iot": "MQTT · LoRaWAN (ChirpStack, Everynet, Netmore) · NB-IoT · TALQ",
+        "infra": "Docker · GitLab CI · GeoServer"
+      }
+    }
+  },
+  "projects": {
+    "title": "Projetos",
+    "lead": "Trabalhos selecionados, 2024 → hoje. A maior parte roda em produção — alguns sob NDA, então os links de código são privados.",
+    "featured": "destaque",
+    "readCaseStudy": "Ler estudo de caso",
+    "readMore": "Ler mais",
+    "privateRepo": "Repo privado",
+    "lsAll": "ls ./projetos --all",
+    "backToProjects": "cd ../projetos",
+    "caseStudyPending": "O estudo de caso completo está sendo escrito. Enquanto isso, fica a versão curta.",
+    "tgPlus": {
+      "eyebrow": "Plataforma de iluminação pública inteligente",
+      "title": "TG+",
+      "area": "Full stack · IoT",
+      "description": "Inventário georreferenciado, gestão remota e relatórios para a iluminação da cidade. Operadores veem cada luminária num mapa ao vivo, agendam dimerização e são alertados quando uma falha — geralmente antes de alguém na rua perceber.",
+      "role": "Minha parte: construí o frontend do zero, sou responsável pela integração TALQ e contribuo nos serviços IoT em .NET.",
+      "module": {
+        "label": "módulo",
+        "name": "integração TALQ",
+        "note": "— padrão de interoperabilidade para smart cities",
+        "description": "Permite que plataformas de terceiros façam bootstrap, leiam dados, controlem e agrupem nossas luminárias pela API internacional TALQ: calendários, programas de controle, overrides agendados e envio de medições e alertas."
+      },
+      "stats": {
+        "lines": "linhas do frontend escritas por mim",
+        "tests": "testes do TALQ",
+        "production": "em produção"
+      },
+      "highlightsTitle": "Destaques",
+      "highlights": {
+        "frontend": {
+          "title": "Frontend do zero",
+          "period": "2024–2026",
+          "body": "Arquitetura React/TypeScript com layout, rotas, contexts, camada de API e tabelas padronizadas. Mapas Leaflet (KMZ, heatmap via GeoServer, desenho de regiões), tempo real via WebSocket STOMP, relatórios PDF/XLSX, tradução pt-BR/es e migração NextUI → HeroUI."
+        },
+        "talq": {
+          "title": "Integração TALQ",
+          "period": "mar–out/2026",
+          "body": "Lado gateway do protocolo aberto TALQ: bootstrap, device-classes e devices, comissionamento, calendários, control-programs, override-commands agendados no JobRunr, log-reports com envio de medições e alertas, mTLS e tiers por deploy. ~8,9 mil linhas de código e ~5,4 mil de testes."
+        },
+        "commands": {
+          "title": "Comandos remotos que se adaptam ao dispositivo",
+          "period": "2024–2026",
+          "body": "No frontend, botões e abas mudam conforme a tecnologia e o firmware do modem, com envio em massa, multicast e dimerização. No backend e no core .NET, novos comandos DLMS: Cellular Identity, Heart Beat Extended e Link Check Interval."
+        },
+        "units": {
+          "title": "Unidades de iluminação com slots e histórico",
+          "period": "set–out/2026",
+          "body": "Remodelagem do domínio para manter o histórico ao trocar a fotocélula, com dual-write e um resolver que alimenta ~12 endpoints agregados. Backend e frontend, com feature-gate por ambiente."
+        },
+        "observability": {
+          "title": "Observabilidade nos serviços .NET",
+          "period": "2025–2026",
+          "body": "Endpoints /health em 6 serviços checando MQTT, RabbitMQ, ActiveMQ e Redis sem abrir conexões novas por requisição, logging estruturado com ILogger nos conectores e migração para .NET 8."
+        }
+      },
+      "map": {
+        "label": "Mapa de uma malha de ruas com luminárias conectadas acendendo",
+        "on": "acesa",
+        "off": "apagada",
+        "fault": "falha",
+        "offline": "offline",
+        "tooltipState": "ON · dim 80% · 42 W",
+        "tooltipStateDay": "OFF · luz do dia · 0 W",
+        "tooltipUplink": "último uplink há {seconds}s"
+      }
+    }
+  },
+  "experience": {
+    "title": "Experiência",
+    "lead": "Onde eu já entreguei código. Leia como um git log — mais recente no topo.",
+    "window": "~/carreira — git log --graph",
+    "present": "atual",
+    "at": "@",
+    "entries": {
+      "nepen": {
+        "role": "Desenvolvedor Full Stack",
+        "company": "NEPEN",
+        "bullets": {
+          "frontend": "Arquitetei do zero o frontend React/TypeScript do TG+ e escrevi ~76% do código atual (~53 mil linhas): mapas com Leaflet e GeoServer, tempo real via WebSocket (STOMP), relatórios PDF/XLSX e tradução pt-BR/es",
+          "twoFactor": "Colaborei na adição da autenticação em dois fatores (2FA)",
+          "talq": "Projetei e implementei sozinho a integração com o protocolo aberto TALQ, em Java/Spring Boot: ~9 mil linhas, 200+ testes, mTLS, agendamento com JobRunr e ativação por cidade via feature flags",
+          "commands": "Criei comandos remotos orientados a configuração, individuais e em massa, que se adaptam à tecnologia e ao firmware de cada dispositivo, e implementei novos comandos DLMS/COSEM no core .NET",
+          "units": "Remodelei o domínio de unidades de iluminação para preservar o histórico na troca de equipamento, com dual-write e endpoints agregados, do banco ao frontend",
+          "connectors": "Mantenho os conectores IoT em .NET: adicionei health checks (MQTT, RabbitMQ, ActiveMQ, Redis) e logging estruturado a 6 serviços e migrei para .NET 8",
+          "adrs": "Escrevi 12 dos 31 registros de decisão de arquitetura (ADRs) do backend"
+        }
+      }
+    },
+    "initialCommit": "initial commit",
+    "resume": "Baixar currículo (PDF)",
+    "resumeSoon": "em breve",
+    "resumeSoonTitle": "Currículo disponível em breve",
+    "linkedin": "Ver no LinkedIn"
+  },
+  "contact": {
+    "title": "Contato",
+    "badge": "Aberto a novas oportunidades",
+    "headline": "Tem um projeto que precisa <accent>ficar ligado</accent>?",
+    "body": "Plataformas IoT, dashboards com mapas, integrações que precisam sobreviver a redes reais — ou só uma conversa sobre código. Costumo responder em até um dia.",
+    "copy": "copiar",
+    "copied": "copiado",
+    "copyLabel": "Copiar endereço de e-mail",
+    "links": {
+      "linkedin": "linkedin",
+      "github": "github",
+      "resume": "curriculo"
+    },
+    "form": {
+      "file": "nova-mensagem.eml",
+      "meta": "rascunho",
+      "to": "para:",
+      "from": "de:",
+      "subject": "assunto:",
+      "message": "mensagem",
+      "fromPlaceholder": "seu@email.com",
+      "subjectPlaceholder": "O que vamos construir?",
+      "messagePlaceholder": "Oi Levi, queria conversar sobre…",
+      "note": "Vai direto para minha caixa de entrada · nada de spam.",
+      "send": "Enviar",
+      "sending": "Enviando…",
+      "success": "Mensagem enviada. Respondo em breve.",
+      "error": "Algo deu errado. Me mande um e-mail diretamente.",
+      "errors": {
+        "from": "Informe um e-mail válido.",
+        "subject": "Adicione um assunto (até 150 caracteres).",
+        "message": "Escreva pelo menos 10 caracteres."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "⚡ Se a lâmpada da sua rua queimou, alguém já sabe. Possivelmente por causa de um commit meu.",
+    "branch": "main",
+    "operational": "todos os sistemas operacionais",
+    "yourTime": "seu horário",
+    "myTime": "o meu",
+    "language": "Markdown",
+    "encoding": "UTF-8"
+  },
+  "notFound": {
+    "title": "Comando não encontrado",
+    "error": "zsh: command not found:",
+    "hint": "Essa página não existe — talvez nunca tenha ido para produção.",
+    "home": "cd ~"
+  }
+}
